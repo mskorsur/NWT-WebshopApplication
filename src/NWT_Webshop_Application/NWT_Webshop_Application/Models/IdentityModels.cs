@@ -5,6 +5,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace NWT_Webshop_Application.Models
 {
@@ -13,12 +15,12 @@ namespace NWT_Webshop_Application.Models
     {
         [Required]
         [StringLength(20, MinimumLength = 2)]
-        [DisplayName("First Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Required]
         [StringLength(25, MinimumLength = 3)]
-        [DisplayName("Last name")]
+        [Display(Name = "Last name")]
         public string LastName { get; set; }
 
         [Required]
@@ -35,6 +37,11 @@ namespace NWT_Webshop_Application.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public ICollection<int> ListOfRatedProducts{ get; set; }
+
+        public virtual ShoppingCart ShoppingCart { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
