@@ -7,9 +7,9 @@ using System.Web;
 
 namespace NWT_Webshop_Application.Models
 {
-    public class WebshopDBContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public WebshopDBContext()
+        public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
@@ -18,10 +18,9 @@ namespace NWT_Webshop_Application.Models
 
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
-
-        public static WebshopDBContext Create()
+        public static ApplicationDbContext Create()
         {
-            return new WebshopDBContext();
+            return new ApplicationDbContext();
         }
     }
 }
