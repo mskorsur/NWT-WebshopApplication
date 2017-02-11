@@ -11,7 +11,7 @@ namespace NWT_Webshop_Application.Models
     {
         [Key]
         [ForeignKey("User")]
-        public int UserId { get; set; }
+        public int ShoppingCartID { get; set; }
 
         public virtual ApplicationUser User { get; set; }
 
