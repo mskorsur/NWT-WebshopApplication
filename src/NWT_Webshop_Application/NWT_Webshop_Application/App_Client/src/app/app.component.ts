@@ -34,9 +34,16 @@ import ShoppingCartService from './services/shopping-cart.service';
       </form>
       <ul class="nav navbar-nav navbar-right">
       <li role="presentation"><a routerLink="/cart">Shopping cart <span class="badge">{{numberOfShoppingCartItems}}</span></a></li>
-        <li role="presentation">
-          <a routerLink="/sign" routerLinkActive="active" role="button"><i class="fa fa-user-circle"></i> Hello, add user name </a>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> Hello, user!</a>
+          <ul class="dropdown-menu">
+            <li><a routerLink="/add-product" routerLinkActive="active">Add new item</a></li>
+            <li><a routerLink="/profile" routerLinkActive="active" >My profile</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Log out</a></li>
+          </ul>
         </li>
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
