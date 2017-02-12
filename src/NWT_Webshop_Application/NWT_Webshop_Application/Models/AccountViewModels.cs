@@ -65,6 +65,20 @@ namespace NWT_Webshop_Application.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(50, MinimumLength = 2)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(50, MinimumLength = 3)]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [StringLength(100, MinimumLength = 5)]
+        public string Address { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

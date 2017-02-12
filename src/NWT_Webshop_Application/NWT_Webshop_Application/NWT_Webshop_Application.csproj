@@ -189,6 +189,14 @@
     <Compile Include="Migrations\201702111926197_ApplicationModelChanged.Designer.cs">
       <DependentUpon>201702111926197_ApplicationModelChanged.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201702121703147_UserModelUpdated.cs" />
+    <Compile Include="Migrations\201702121703147_UserModelUpdated.Designer.cs">
+      <DependentUpon>201702121703147_UserModelUpdated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201702121714547_UserModelUpdate2.cs" />
+    <Compile Include="Migrations\201702121714547_UserModelUpdate2.Designer.cs">
+      <DependentUpon>201702121714547_UserModelUpdate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -274,6 +282,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201702111926197_ApplicationModelChanged.resx">
       <DependentUpon>201702111926197_ApplicationModelChanged.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702121703147_UserModelUpdated.resx">
+      <DependentUpon>201702121703147_UserModelUpdated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201702121714547_UserModelUpdate2.resx">
+      <DependentUpon>201702121714547_UserModelUpdate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

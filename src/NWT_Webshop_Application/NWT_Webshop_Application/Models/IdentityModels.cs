@@ -13,36 +13,6 @@ namespace NWT_Webshop_Application.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        [Required]
-        [StringLength(20, MinimumLength = 2)]
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-
-        [Required]
-        [StringLength(25, MinimumLength = 3)]
-        [Display(Name = "Last name")]
-        public string LastName { get; set; }
-
-        [Required]
-        [StringLength(50, MinimumLength = 5)]
-        public string Address { get; set; }
-
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [DataType(DataType.Password)]
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-        [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
-
-        public ICollection<int> ListOfRatedProducts{ get; set; }
-
-        public virtual ShoppingCart ShoppingCart { get; set; }
-
-
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
@@ -50,6 +20,24 @@ namespace NWT_Webshop_Application.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        [Required]
+        [StringLength(50, MinimumLength = 2)]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [StringLength(50, MinimumLength = 3)]
+        [Display(Name = "Last name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [StringLength(100, MinimumLength = 5)]
+        public string Address { get; set; }
+
+        public ICollection<int> ListOfRatedProducts { get; set; }
+
+        public virtual ShoppingCart ShoppingCart { get; set; }
     }
 
 }
