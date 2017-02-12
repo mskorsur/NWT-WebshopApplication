@@ -55,8 +55,8 @@ import ShoppingCartService from './../services/shopping-cart.service';
                             <div class="ratings">
                             <p class="pull-right"><a class="btn btn-primary thumb-button" role="button" (click)="saveProductToCart(product.id)">Add to cart</a></p>
                                 <p>
-                                    <i class="fa fa-star" aria-hidden="true" *ngFor="let i=index" *ngIf="i < product.averageScore"></i>
-                                    <i class="fa fa-star-o" aria-hidden="true" *ngFor="let i=index" *ngIf="i < (5 - Math.Floor(product.averageScore)"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-o" aria-hidden="true"></i>
                                 </p>
                             </div>
                         </div>

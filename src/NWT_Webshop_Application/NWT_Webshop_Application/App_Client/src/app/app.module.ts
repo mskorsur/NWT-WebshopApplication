@@ -25,8 +25,8 @@ import ShoppingCartService from './services/shopping-cart.service';
   ],
   declarations:
   [
-     AppComponent, HomepageComponent, 
-     ProductListComponent, ProductDetailsComponent, 
+     AppComponent, HomepageComponent, PageNotFoundRouteComponent, 
+     ProductListComponent, ProductDetailsComponent, AddProductComponent,
      UserInfoComponent,
      ShoppingCartComponent 
   ],

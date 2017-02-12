@@ -26,8 +26,8 @@ import ShoppingCartService from './../services/shopping-cart.service';
                         <hr />
                         <div class="row rating-desc">
                             <div class="col-md-12">
-                                <span class="glyphicon glyphicon-star" *ngFor="let i=index" *ngIf="i < product.averageScore"></span>
-                                <span class="glyphicon glyphicon-star-empty" *ngFor="let i=index" *ngIf="i < (5 - Math.Floor(product.averageScore)"></span>({{product.averageScore}})<span class="separator">|</span>
+                                <span class="glyphicon glyphicon-star" ></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>({{product.averageScore}})<span class="separator">|</span>
                                 <button class="btn btn-primary" (click)="saveProductToCart(product.id)">Add to cart</button>
                             </div>
                         </div>
