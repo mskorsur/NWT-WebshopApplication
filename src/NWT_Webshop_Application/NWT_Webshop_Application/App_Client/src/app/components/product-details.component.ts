@@ -32,8 +32,8 @@ import ShoppingCartService from './../services/shopping-cart.service';
 						/>
 						<div class="rating">
 							<div class="stars">
-								<span class="fa fa-star checked" ></span>
-								<span class="fa fa-star"></span>
+								<span class="glyphicon glyphicon-star" ></span>
+								<span class="glyphicon glyphicon-star-empty"></span>
 							</div>
 						</div>
 

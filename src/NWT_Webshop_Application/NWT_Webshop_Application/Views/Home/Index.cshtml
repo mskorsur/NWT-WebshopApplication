@@ -14,13 +14,15 @@
 }
 else
 {
-    <div class="jumbotron">
-        <h1>Webshop application</h1>
-        <p class="lead">Hello there! To begin using this application, please log in or register.</p>
-        <p>
-            @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-primary btn-lg" })
-            @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-primary btn-lg" })
-        </p>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Webshop application</h1>
+            <p class="lead">Hello there! To begin using this application, please log in or register.</p>
+            <p>
+                @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-primary btn-lg" })
+                @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-primary btn-lg" })
+            </p>
+        </div>
     </div>
 }
 

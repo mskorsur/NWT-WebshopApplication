@@ -35,7 +35,7 @@ import ShoppingCartService from './services/shopping-cart.service';
       <ul class="nav navbar-nav navbar-right">
       <li role="presentation"><a routerLink="/cart">Shopping cart <span class="badge">{{numberOfShoppingCartItems}}</span></a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle" aria-hidden="true"></i> Hello, user!</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Hello, user!</a>
           <ul class="dropdown-menu">
             <li><a routerLink="/add-product" routerLinkActive="active">Add new item</a></li>
             <li><a routerLink="/profile" routerLinkActive="active" >My profile</a></li>
