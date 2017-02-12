@@ -211,6 +211,7 @@
     <Content Include="App_Client\webpack.config.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\header.jpg" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />

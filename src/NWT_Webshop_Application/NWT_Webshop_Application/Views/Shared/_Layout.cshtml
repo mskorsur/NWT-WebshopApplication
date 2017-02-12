@@ -11,10 +11,12 @@
 </head>
 <body>
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - NWT Webshop Application</p>
-        </footer>
+        <div class="container">
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - NWT Webshop Application</p>
+            </footer>
+        </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
