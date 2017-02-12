@@ -5,7 +5,11 @@
 @if (Request.IsAuthenticated)
 {
     <my-app></my-app>
-    @Scripts.Render("~/bundles/app")
+    @section scripts {
+        <script src="/Scripts/polyfills.js"></script>
+        <script src="/Scripts/vendor.js"></script>
+        <script src="/Scripts/app.js"></script>
+ }
 
 }
 else
