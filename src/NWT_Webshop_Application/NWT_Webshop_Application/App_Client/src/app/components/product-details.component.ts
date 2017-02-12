@@ -32,7 +32,7 @@ import ShoppingCartService from './../services/shopping-cart.service';
 						/>
 						<div class="rating">
 							<div class="stars">
-								<span class="fa fa-star checked *ngFor="let i=index" *ngIf="i < product.averageScore""></span>
+								<span class="fa fa-star checked *ngFor="let i=index" *ngIf="i < product.averageScore"></span>
 								<span class="fa fa-star" *ngFor="let i=index" *ngIf="i < (5 - Math.Floor(product.averageScore)"></span>
 							</div>
 						</div>
