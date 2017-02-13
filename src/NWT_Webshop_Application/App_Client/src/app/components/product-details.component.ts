@@ -59,7 +59,11 @@ import ShoppingCartService from './../services/shopping-cart.service';
 							(keyup.enter)="finishProductPriceEditing(inputPrice.value, true)"
 							(keyup.esc)="finishProductPriceEditing(inputPrice.value, false)" 
 						/>
-						<p class="price"><strong>TAGS:</strong> men, shoes</p>
+						<p class="price" *ngIf="!tagsEditMode" (dblclick)="tagsEditMode = true"><strong>TAGS:</strong> {{product.tags}}</p>
+						<input #inputTags *ngIf="tagsEditMode" [value]="product.tags"
+							(keyup.enter)="finishProductTagsEditing(inputTags.value, true)"
+							(keyup.esc)="finishProductTagsEditing(inputTags.value, false)" 
+						/>
 
              <div class="action">
 			  <button type="submit" class="btn btn-primary btn-lg" type="button" (click)="saveProductToCart(product.id)">Add to cart <span class="glyphicon glyphicon-shopping-cart"></span></button>
@@ -99,6 +103,7 @@ export default class ProductDetailsComponent {
 	private descriptionEditMode: boolean;
 	private priceEditMode: boolean;
 	private imgURLEditMode: boolean;
+	private tagsEditMode: boolean;
 	private math: any;
 
     constructor (productService: ProductService, route: ActivatedRoute, private cartService:ShoppingCartService) {
@@ -112,6 +117,7 @@ export default class ProductDetailsComponent {
 		this.descriptionEditMode = false;
 		this.priceEditMode = false;
 		this.imgURLEditMode = false;
+		this.tagsEditMode = false;
     }
 
 	private saveProductToCart (id:number) {
@@ -151,6 +157,15 @@ export default class ProductDetailsComponent {
 	   }
 
 	   this.imgURLEditMode = false;
+   }
+
+   private finishProductTagsEditing (value: string, save: boolean) {
+	   if (save) {
+		   var newTags: string[] = value.split(",");
+		   this.product.tags = newTags;
+	   }
+
+	   this.tagsEditMode = false;
    }
 
    private rateProduct(value: string) {

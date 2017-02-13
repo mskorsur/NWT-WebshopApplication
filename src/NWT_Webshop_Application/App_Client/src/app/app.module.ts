@@ -15,6 +15,7 @@ import AddProductComponent from './components/add-product.component';
 
 import ProductService from './services/product.service';
 import ShoppingCartService from './services/shopping-cart.service';
+import UserService from './services/user.service';
 
 @NgModule({
   imports:     
@@ -30,7 +31,7 @@ import ShoppingCartService from './services/shopping-cart.service';
      UserInfoComponent,
      ShoppingCartComponent 
   ],
-  providers: [ ProductService, ShoppingCartService ],
+  providers: [ ProductService, ShoppingCartService, UserService ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

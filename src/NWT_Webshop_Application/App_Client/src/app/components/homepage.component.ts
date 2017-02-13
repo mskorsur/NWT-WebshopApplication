@@ -76,7 +76,7 @@ export default class HomepageComponent {
     private productList: Product[];
     private math: any;
 
-    constructor(productService: ProductService, private cartService: ShoppingCartService) {
+    constructor(private productService: ProductService, private cartService: ShoppingCartService) {
         this.math = Math;
         this.productList = productService.getAllProducts();
     }
