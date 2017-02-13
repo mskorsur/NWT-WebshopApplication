@@ -55,7 +55,15 @@ import ShoppingCartService from './../services/shopping-cart.service';
                             <div class="ratings">
                             <p class="pull-right"><a class="btn btn-primary thumb-button" role="button" (click)="saveProductToCart(product.id)">Add to cart</a></p>
                                 <p>
-                                   Rating: {{product.averageScore}}
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 1"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 2"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 3"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 4"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore == 5"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 1"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 2"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 3"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 4"></span>
                                 </p>
                             </div>
                         </div>
@@ -66,8 +74,10 @@ import ShoppingCartService from './../services/shopping-cart.service';
 })
 export default class HomepageComponent { 
     private productList: Product[];
+    private math: any;
 
     constructor(productService: ProductService, private cartService: ShoppingCartService) {
+        this.math = Math;
         this.productList = productService.getAllProducts();
     }
 

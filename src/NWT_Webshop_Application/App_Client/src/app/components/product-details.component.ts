@@ -32,8 +32,16 @@ import ShoppingCartService from './../services/shopping-cart.service';
 						/>
 						<div class="rating">
 							<div class="stars">
-								<span class="glyphicon glyphicon-star" ></span>
-								<span class="glyphicon glyphicon-star-empty"></span>
+								 <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 1"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 2"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 3"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 4"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore == 5"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 1"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 2"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 3"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 4"></span>
+								   ({{product.averageScore}})
 							</div>
 						</div>
 
@@ -91,11 +99,14 @@ export default class ProductDetailsComponent {
 	private descriptionEditMode: boolean;
 	private priceEditMode: boolean;
 	private imgURLEditMode: boolean;
+	private math: any;
 
     constructor (productService: ProductService, route: ActivatedRoute, private cartService:ShoppingCartService) {
         const id = +route.snapshot.params['id'];
         this.product = productService.getProductById(id);
 		
+		this.math = Math;
+
 		this.addedToCart = false;
 		this.nameEditMode = false;
 		this.descriptionEditMode = false;

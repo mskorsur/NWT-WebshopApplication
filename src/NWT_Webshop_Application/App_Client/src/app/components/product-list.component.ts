@@ -26,8 +26,15 @@ import ShoppingCartService from './../services/shopping-cart.service';
                         <hr />
                         <div class="row rating-desc">
                             <div class="col-md-12">
-                                <span class="glyphicon glyphicon-star" ></span>
-                                <span class="glyphicon glyphicon-star-empty"></span>({{product.averageScore}})<span class="separator">|</span>
+                                 <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 1"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 2"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 3"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 4"></span>
+                                   <span class="glyphicon glyphicon-star" *ngIf="product.averageScore == 5"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 1"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 2"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 3"></span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 4"></span>({{product.averageScore}})<span class="separator">|</span>
                                 <button class="btn btn-primary" (click)="saveProductToCart(product.id)">Add to cart</button>
                             </div>
                         </div>
@@ -43,12 +50,14 @@ import ShoppingCartService from './../services/shopping-cart.service';
 
 export default class ProductListComponent {
    private productList: Product[];
+   private math: any;
 
    constructor(productService: ProductService, private cartService: ShoppingCartService) {
        this.productList = productService.getAllProducts();
    }
 
    private saveProductToCart(id:number) {
+         this.math = Math;
 		 this.cartService.saveProductInCartById(id);
 	}
 }

@@ -4,6 +4,8 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'user-info',
     template: `
+        <div class="row">
+        <div class="col-sm-4 col-sm-offset-1">
         <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">User profile information <span class="glyphicon glyphicon-info-sign"></span></h3>
@@ -28,6 +30,8 @@ import { Component } from '@angular/core';
                         </li>
                     </ul>
                 </div>
+        </div>
+        </div>
         </div>
     `
 })
