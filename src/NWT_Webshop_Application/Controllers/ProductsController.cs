@@ -20,7 +20,7 @@ namespace NWT_Webshop_Application.Controllers
         // GET: api/Products
         public IQueryable<Product> GetProducts()
         {
-            return db.Products;
+            return db.Products.Include(p => p.ShoppingCarts);
         }
 
         // GET: api/Products/5

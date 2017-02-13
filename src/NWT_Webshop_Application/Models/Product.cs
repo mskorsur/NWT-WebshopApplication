@@ -34,7 +34,7 @@ namespace NWT_Webshop_Application.Models
         public int NumberOfScores { get; set; }
 
         [Required]
-        public string[] Tags { get; set; }
+        public ICollection<string> Tags { get; set; }
 
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
 

@@ -43,6 +43,7 @@
 
 .thumbnail {
     padding: 0;
+    margin-bottom: 4px;
 }
 
 .thumbnail .caption-full {
