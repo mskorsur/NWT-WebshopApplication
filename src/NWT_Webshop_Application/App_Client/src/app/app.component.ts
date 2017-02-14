@@ -43,7 +43,7 @@ import Product from './models/Product';
             <li><a routerLink="/add-product" routerLinkActive="active">Add new item</a></li>
             <li><a routerLink="/profile" routerLinkActive="active" >My profile</a></li>
             <li role="separator" class="divider"></li>
-            <li><a>Log off</a></li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
           </ul>
         </li>
 
