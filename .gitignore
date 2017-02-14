@@ -241,4 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 
-App_Client/node_modules/
+src/NWT_Webshop_Application/App_Client/node_modules
+node_modules

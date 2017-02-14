@@ -69,7 +69,7 @@ import ShoppingCartService from './../services/shopping-cart.service';
 			  <button type="submit" class="btn btn-primary btn-lg" type="button" (click)="saveProductToCart(product.id)">Add to cart <span class="glyphicon glyphicon-shopping-cart"></span></button>
 
 			  <div class="col-md-4">
-				 <div class="input-group">
+				 <div class="input-group input-group-lg">
 						<select class="form-control" #ratingSelect>
 							<option>1</option>
 							<option>2</option>
@@ -106,7 +106,7 @@ export default class ProductDetailsComponent {
 	private tagsEditMode: boolean;
 	private math: any;
 
-    constructor (productService: ProductService, route: ActivatedRoute, private cartService:ShoppingCartService) {
+    constructor (private productService: ProductService, route: ActivatedRoute, private cartService:ShoppingCartService) {
         const id = +route.snapshot.params['id'];
         this.product = productService.getProductById(id);
 		
@@ -129,7 +129,7 @@ export default class ProductDetailsComponent {
 	
    private finishProductNameEditing (value: string, save: boolean) {
 	   if (save) {
-		   this.product.name = value;
+		   this.productService.updateProductName(this.product, value);
 	   }
 
 	   this.nameEditMode = false;
@@ -137,7 +137,7 @@ export default class ProductDetailsComponent {
 
    private finishProductDescEditing (value: string, save: boolean) {
 	   if (save) {
-		   this.product.description = value;
+		   this.productService.updateProductDescription(this.product, value);
 	   }
 
 	   this.descriptionEditMode = false;
@@ -145,7 +145,8 @@ export default class ProductDetailsComponent {
     
 	private finishProductPriceEditing (value: string, save: boolean) {
 	   if (save) {
-		   this.product.price = parseFloat(value);
+		   var newPrice: number = parseFloat(value);
+		   this.productService.updateProductPrice(this.product, newPrice);
 	   }
 
 	   this.priceEditMode = false;
@@ -153,7 +154,7 @@ export default class ProductDetailsComponent {
 	
 	private finishProductImageEditing (value: string, save: boolean) {
 	   if (save) {
-		   this.product.imageURL = value;
+		  this.productService.updateProductImage(this.product, value);
 	   }
 
 	   this.imgURLEditMode = false;
@@ -162,7 +163,7 @@ export default class ProductDetailsComponent {
    private finishProductTagsEditing (value: string, save: boolean) {
 	   if (save) {
 		   var newTags: string[] = value.split(",");
-		   this.product.tags = newTags;
+		   this.productService.updateProductTags(this.product, newTags);
 	   }
 
 	   this.tagsEditMode = false;
