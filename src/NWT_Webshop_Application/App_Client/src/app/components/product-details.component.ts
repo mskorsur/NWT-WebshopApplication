@@ -106,7 +106,9 @@ export default class ProductDetailsComponent {
 	private tagsEditMode: boolean;
 	private math: any;
 
-    constructor (private productService: ProductService, route: ActivatedRoute, private cartService:ShoppingCartService) {
+    constructor (private productService: ProductService, 
+	             private route: ActivatedRoute, 
+				 private cartService:ShoppingCartService) {
         const id = +route.snapshot.params['id'];
         this.product = productService.getProductById(id);
 		

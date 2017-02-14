@@ -1,4 +1,6 @@
 import { Component, Input, Output } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+
 import Product from './../models/Product';
 import ProductService from './../services/product.service';
 import ShoppingCartService from './../services/shopping-cart.service';
@@ -52,12 +54,16 @@ export default class ProductListComponent {
    private productList: Product[];
    private math: any;
 
-   constructor(productService: ProductService, private cartService: ShoppingCartService) {
-       this.productList = productService.getAllProducts();
+   constructor(private productService: ProductService, 
+               private cartService: ShoppingCartService,
+               private route: ActivatedRoute) {
+        const category = route.snapshot.params['category'];
+        this.productList = this.productService.getProductsByCategory(category);
+        this.math = Math;
    }
 
    private saveProductToCart(id:number) {
          this.math = Math;
 		 this.cartService.saveProductInCartById(id);
-	}
+   }
 }

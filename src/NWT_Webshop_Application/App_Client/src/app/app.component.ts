@@ -23,10 +23,10 @@ import Product from './models/Product';
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a routerLink="/products" routerLinkActive="active" role="button" >MEN <span class="caret"></span></a>
+          <a [routerLink]="['/products', 'men']" role="button" >MEN <span class="caret"></span></a>
         </li>
         <li class="dropdown">
-          <a href="#" role="button">WOMEN <span class="caret"></span></a>
+          <a [routerLink]="['/products', 'women']" role="button">WOMEN <span class="caret"></span></a>
         </li>
       </ul>
       <form class="navbar-form navbar-left">
@@ -58,6 +58,8 @@ import Product from './models/Product';
 export class AppComponent { 
   constructor(private productService: ProductService, 
               private userService: UserService,
-              private router: Router) {}
+              private router: Router) {
+        this.productService.getAllProducts();
+              }
 
 }

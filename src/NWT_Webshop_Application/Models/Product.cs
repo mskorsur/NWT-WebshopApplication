@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -37,6 +38,7 @@ namespace NWT_Webshop_Application.Models
         [StringLength(200)]
         public string Tags { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
 
     }

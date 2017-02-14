@@ -23,6 +23,21 @@ namespace NWT_Webshop_Application.Controllers
             return db.Products.Include(p => p.ShoppingCarts);
         }
 
+        // GET: api/Products/men
+        public ICollection<Product> GetProductsByCategory(string category)
+        {
+            var products =  db.Products.Include(p => p.ShoppingCarts);
+            List<Product> specifiedProducts = new List<Product>();
+
+            foreach (var product in products)
+            {
+                if (product.Tags.Contains(category))
+                    specifiedProducts.Add(product);
+            }
+
+            return specifiedProducts;
+        }
+
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
         public IHttpActionResult GetProduct(int id)

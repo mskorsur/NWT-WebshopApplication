@@ -16,11 +16,16 @@ namespace NWT_Webshop_Application
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+               name: "GetByCategoryApi",
+               routeTemplate: "api/{controller}/{category}"
+           );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
-
+         
             var formatters = GlobalConfiguration.Configuration.Formatters;
             var jsonFormatter = formatters.JsonFormatter;
             var settings = jsonFormatter.SerializerSettings;

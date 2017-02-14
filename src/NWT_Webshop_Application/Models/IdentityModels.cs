@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace NWT_Webshop_Application.Models
 {
@@ -35,6 +36,7 @@ namespace NWT_Webshop_Application.Models
         [StringLength(100, MinimumLength = 5)]
         public string Address { get; set; }
 
+        [JsonIgnore]
         public ICollection<Product> ListOfRatedProducts { get; set; }
 
         public virtual ShoppingCart ShoppingCart { get; set; }
