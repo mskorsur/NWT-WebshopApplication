@@ -37,7 +37,7 @@ import UserService from './../services/user.service';
                             <h4 class="list-group-item-heading">Email</h4>
                             <p class="list-group-item-text" *ngIf="!emailEditMode"
                             (dblclick)="emailEditMode = true">{{currentUser.email}}</p>
-                            <input #inputEmail *ngIf="emailNameEditMode" [value]="currentUser.email"
+                            <input type="email" #inputEmail *ngIf="emailEditMode" [value]="currentUser.email"
 							(keyup.enter)="finishUserEmailEditing(inputEmail.value, true)"
 							(keyup.esc)="finishUserEmailEditing(inputEmail.value, false)" 
 						    />

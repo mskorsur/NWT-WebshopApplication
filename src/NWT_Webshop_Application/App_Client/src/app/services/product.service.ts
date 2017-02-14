@@ -8,7 +8,7 @@ export default class ProductService {
     public productList: Product[];
 
     constructor(private http: Http){
-        this.http.get("http://localhost:63757/api/Products")
+         this.http.get("http://localhost:63757/api/Products")
                  .subscribe( response => {
                      const serverProducts: Array<any> = response.json();
                      this.productList = serverProducts.map(p => new Product
@@ -24,7 +24,7 @@ export default class ProductService {
                        amount: 1 }));
                  }, error => {
                      console.log("Error when retrieving products from server")
-                 });
+                 });       
        /* this.productList = [
             new Product({id: 1, name: "Sweatshirt", 
             description: "A very nice sweatshirt for men.", 
@@ -54,7 +54,7 @@ export default class ProductService {
     }
 
     public getAllProducts(): Product[] {
-        return this.productList;
+       return this.productList;
     }
 
     public getProductById(id:number): Product {

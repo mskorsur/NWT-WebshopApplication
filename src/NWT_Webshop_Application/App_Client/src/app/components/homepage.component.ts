@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Product from './../models/Product';
 import ProductService from './../services/product.service';
 import ShoppingCartService from './../services/shopping-cart.service';
@@ -72,15 +72,20 @@ import ShoppingCartService from './../services/shopping-cart.service';
 
     `
 })
-export default class HomepageComponent implements OnInit{ 
+export default class HomepageComponent implements OnInit { 
     private productList: Product[];
     private math: any;
 
-    constructor(private productService: ProductService, private cartService: ShoppingCartService) {
+    constructor(private productService: ProductService, 
+                private cartService: ShoppingCartService) {
         this.math = Math;
     }
 
     ngOnInit() {
+        this.getProducts();
+    }
+
+    private getProducts() {
         this.productList = this.productService.getAllProducts();
     }
 

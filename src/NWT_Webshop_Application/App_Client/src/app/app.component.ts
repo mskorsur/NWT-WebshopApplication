@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
-import ShoppingCartService from './services/shopping-cart.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import UserService from './services/user.service';
+import ProductService from './services/product.service';
+import Product from './models/Product';
 
 @Component({
   selector: 'my-app',
@@ -40,7 +43,7 @@ import ShoppingCartService from './services/shopping-cart.service';
             <li><a routerLink="/add-product" routerLinkActive="active">Add new item</a></li>
             <li><a routerLink="/profile" routerLinkActive="active" >My profile</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Log out</a></li>
+            <li><a>Log off</a></li>
           </ul>
         </li>
 
@@ -53,8 +56,8 @@ import ShoppingCartService from './services/shopping-cart.service';
 `
 })
 export class AppComponent { 
+  constructor(private productService: ProductService, 
+              private userService: UserService,
+              private router: Router) {}
 
-  constructor(private cartService: ShoppingCartService){
-  }
-  
 }

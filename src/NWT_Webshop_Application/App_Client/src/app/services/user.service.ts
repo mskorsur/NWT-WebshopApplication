@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
 import User from './../models/User';
 
+@Injectable()
 export default class UserService {
     public user: User;
 
-    constructor () {
+    constructor (private http: Http) {
         this.user = new User ({
             id: 1,
             firstName: "Marin",
@@ -19,4 +21,5 @@ export default class UserService {
     public getCurrentUser(): User {
         return this.user;
     }
+
 }

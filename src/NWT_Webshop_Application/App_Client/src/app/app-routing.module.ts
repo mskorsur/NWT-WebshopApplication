@@ -11,12 +11,13 @@ import AddProductComponent from './components/add-product.component';
 
 
 const routes: Routes = [
-      { path: '', component: HomepageComponent },
+      { path: 'home', component: HomepageComponent },
       { path: 'products/:category', component: ProductListComponent },
       { path: 'product/:id', component: ProductDetailsComponent },
       { path: 'add-product', component: AddProductComponent },
       { path: 'profile', component: UserInfoComponent },
       { path: 'cart', component: ShoppingCartComponent },
+      { path: '',   redirectTo: '/home', pathMatch: 'full' },
       { path: '**', component: PageNotFoundRouteComponent }
 ];
 

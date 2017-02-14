@@ -197,13 +197,9 @@
     <Compile Include="Migrations\201702121714547_UserModelUpdate2.Designer.cs">
       <DependentUpon>201702121714547_UserModelUpdate2.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201702131815391_SeedUpdate.cs" />
-    <Compile Include="Migrations\201702131815391_SeedUpdate.Designer.cs">
-      <DependentUpon>201702131815391_SeedUpdate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702131855581_UpdatedProductTags.cs" />
-    <Compile Include="Migrations\201702131855581_UpdatedProductTags.Designer.cs">
-      <DependentUpon>201702131855581_UpdatedProductTags.cs</DependentUpon>
+    <Compile Include="Migrations\201702141138147_AddedTagModel.cs" />
+    <Compile Include="Migrations\201702141138147_AddedTagModel.Designer.cs">
+      <DependentUpon>201702141138147_AddedTagModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -212,6 +208,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ShoppingCart.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -297,11 +294,8 @@
     <EmbeddedResource Include="Migrations\201702121714547_UserModelUpdate2.resx">
       <DependentUpon>201702121714547_UserModelUpdate2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702131815391_SeedUpdate.resx">
-      <DependentUpon>201702131815391_SeedUpdate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702131855581_UpdatedProductTags.resx">
-      <DependentUpon>201702131855581_UpdatedProductTags.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201702141138147_AddedTagModel.resx">
+      <DependentUpon>201702141138147_AddedTagModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
