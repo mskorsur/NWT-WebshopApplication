@@ -20,7 +20,7 @@ export default class ProductService {
                        price: p.price, 
                        avgScore: p.averageScore, 
                        numScores: p.numberOfScores,
-                       tags: p.tags, 
+                       tags: p.tags.split(","), 
                        amount: 1 }));
                  }, error => {
                      console.log("Error when retrieving products from server")

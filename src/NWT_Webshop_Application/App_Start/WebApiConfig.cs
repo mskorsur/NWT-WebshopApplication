@@ -24,6 +24,7 @@ namespace NWT_Webshop_Application
             var formatters = GlobalConfiguration.Configuration.Formatters;
             var jsonFormatter = formatters.JsonFormatter;
             var settings = jsonFormatter.SerializerSettings;
+            settings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             formatters.Remove(formatters.XmlFormatter);
         }

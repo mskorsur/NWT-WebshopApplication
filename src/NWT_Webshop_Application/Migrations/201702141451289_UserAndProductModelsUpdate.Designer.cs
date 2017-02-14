@@ -7,13 +7,13 @@ namespace NWT_Webshop_Application.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddedTagModel : IMigrationMetadata
+    public sealed partial class UserAndProductModelsUpdate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedTagModel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UserAndProductModelsUpdate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201702141138147_AddedTagModel"; }
+            get { return "201702141451289_UserAndProductModelsUpdate"; }
         }
         
         string IMigrationMetadata.Source

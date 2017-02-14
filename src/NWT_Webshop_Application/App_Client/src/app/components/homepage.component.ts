@@ -82,10 +82,6 @@ export default class HomepageComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getProducts();
-    }
-
-    private getProducts() {
         this.productList = this.productService.getAllProducts();
     }
 
