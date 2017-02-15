@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import UserService from './services/user.service';
 import ProductService from './services/product.service';
 import Product from './models/Product';
+import User from './models/User';
 
 @Component({
   selector: 'my-app',
@@ -38,7 +40,8 @@ import Product from './models/Product';
       <ul class="nav navbar-nav navbar-right">
       <li role="presentation"><a routerLink="/cart">Shopping cart <span class="badge">{{numberOfShoppingCartItems}}</span></a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Hello, user!</a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-user"></span> Hello, user!</a>
           <ul class="dropdown-menu">
             <li><a routerLink="/add-product" routerLinkActive="active">Add new item</a></li>
             <li><a routerLink="/profile" routerLinkActive="active" >My profile</a></li>
@@ -56,8 +59,13 @@ import Product from './models/Product';
 `
 })
 export class AppComponent { 
+  //private currentUser: User;
+
   constructor(private productService: ProductService, 
               private userService: UserService,
-              private router: Router) {}
+              private router: Router) {
+
+        //this.currentUser = this.userService.getCurrentUser();
+  }
 
 }

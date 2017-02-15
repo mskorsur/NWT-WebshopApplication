@@ -43,6 +43,13 @@ namespace NWT_Webshop_Application.Controllers
             currentUser.Email = user.Email;
             currentUser.Address = user.Address;
 
+            //if email is changed, we have to change username
+            //accordingly since email is used as username
+            if (currentUser.UserName != user.Email)
+            {
+                currentUser.UserName = user.Email;
+            }
+
             db.Entry(currentUser).State = EntityState.Modified;
 
             db.SaveChanges();
