@@ -58,8 +58,6 @@ import Product from './models/Product';
 export class AppComponent { 
   constructor(private productService: ProductService, 
               private userService: UserService,
-              private router: Router) {
-        this.productService.getAllProducts();
-              }
+              private router: Router) {}
 
 }

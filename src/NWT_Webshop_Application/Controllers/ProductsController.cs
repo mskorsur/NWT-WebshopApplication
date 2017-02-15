@@ -23,7 +23,8 @@ namespace NWT_Webshop_Application.Controllers
             return db.Products.Include(p => p.ShoppingCarts);
         }
 
-        // GET: api/Products/men
+        // GET: api/Products/GetByCategory/men
+        [Route("api/Products/GetByCategory/{category}")]
         public ICollection<Product> GetProductsByCategory(string category)
         {
             var products =  db.Products.Include(p => p.ShoppingCarts);
@@ -53,6 +54,7 @@ namespace NWT_Webshop_Application.Controllers
 
         // PUT: api/Products/5
         [ResponseType(typeof(void))]
+        [HttpPut]
         public IHttpActionResult PutProduct(int id, Product product)
         {
             if (!ModelState.IsValid)

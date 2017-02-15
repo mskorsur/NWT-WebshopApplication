@@ -4,7 +4,7 @@ export default class User {
     public lastName: string;
     public email: string;
     public address: string;
-    public ratedProducts: number[];
+    public ratedProducts: any[];
 
     constructor(userObject: UserConstructorObject){
         this.id = userObject.id;
@@ -24,5 +24,5 @@ interface UserConstructorObject {
     lastName: string;
     email: string;
     address: string;
-    ratedProducts: number[]
+    ratedProducts: any[]
 }

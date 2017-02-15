@@ -22,5 +22,6 @@ namespace NWT_Webshop_Application.Models
         {
             return new ApplicationDbContext();
         }
+
     }
 }

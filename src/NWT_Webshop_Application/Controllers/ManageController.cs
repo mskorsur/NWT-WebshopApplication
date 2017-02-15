@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NWT_Webshop_Application.Models;
+using System.Net;
 
 namespace NWT_Webshop_Application.Controllers
 {
@@ -15,6 +16,7 @@ namespace NWT_Webshop_Application.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -321,6 +323,23 @@ namespace NWT_Webshop_Application.Controllers
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
+
+        //// PUT: api/UpdateCurrentUser
+        //[HttpPut]
+        //[Route("api/UpdateCurrentUser")]
+        //public void UpdateUser(ApplicationUser user)
+        //{
+        //    string currentUserId = User.Identity.GetUserId();
+        //    var currentUser = db.Users.FirstOrDefault(x => x.Id == currentUserId);
+
+        //    currentUser.FirstName = user.FirstName;
+        //    currentUser.LastName = user.LastName;
+        //    currentUser.Email = user.Email;
+        //    currentUser.Address = user.Address;
+
+        //    var result = UserManager.UpdateAsync(currentUser);
+
+        //}
 
         protected override void Dispose(bool disposing)
         {

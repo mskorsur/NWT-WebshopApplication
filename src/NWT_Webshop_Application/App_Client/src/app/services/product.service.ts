@@ -15,8 +15,7 @@ export default class ProductService {
                      this.productList = serverProducts.map(p => new Product
                      ({id: p.productID, 
                        name: p.name, 
-                       description: 
-                       p.description, 
+                       description: p.description, 
                        imgURL: p.imageURL,
                        price: p.price, 
                        avgScore: p.averageScore, 
@@ -33,11 +32,11 @@ export default class ProductService {
     }
 
     public getProductById(id:number): Product {
-       return this.productList.find(prod => prod.id == id);
+         return this.productList.find(prod => prod.id == id);
     }
 
     public getProductsByCategory(category: string): Product[] {
-        this.http.get(`http://localhost:63757/api/Products/${category}`)
+        this.http.get(`http://localhost:63757/api/Products/GetByCategory/${category}`)
                  .subscribe(
                      response => {
                          const serverProducts: Array<any> = response.json();

@@ -67,7 +67,6 @@ export default class UserInfoComponent {
     private addressEditMode: boolean;
 
     constructor(private userService: UserService) {
-        //TODO: add code that gets currenttly logged user's info from API
         this.currentUser = this.userService.getCurrentUser();
         this.firstNameEditMode = false;
         this.lastNameEditMode = false;
@@ -77,7 +76,7 @@ export default class UserInfoComponent {
 
     private finishUserFirstNameEditing (value: string, save: boolean) {
         if (save) {
-            this.currentUser.firstName = value;
+            this.userService.updateUserFirstName(this.currentUser, value);
         }
 
         this.firstNameEditMode = false;
@@ -85,7 +84,7 @@ export default class UserInfoComponent {
 
     private finishUserLastNameEditing (value: string, save: boolean) {
         if (save) {
-            this.currentUser.lastName = value;
+            this.userService.updateUserLastName(this.currentUser, value);
         }
 
         this.lastNameEditMode = false;
@@ -93,7 +92,7 @@ export default class UserInfoComponent {
 
     private finishUserEmailEditing (value: string, save: boolean) {
         if (save) {
-            this.currentUser.email = value;
+            this.userService.updateUserEmail(this.currentUser, value);
         }
 
         this.emailEditMode = false;
@@ -101,7 +100,7 @@ export default class UserInfoComponent {
 
     private finishUserAddressEditing (value: string, save: boolean) {
         if (save) {
-            this.currentUser.address = value;
+            this.userService.updateUserAddress(this.currentUser, value);
         }
 
         this.addressEditMode = false;
