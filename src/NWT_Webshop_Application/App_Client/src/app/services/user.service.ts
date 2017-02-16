@@ -8,15 +8,6 @@ export default class UserService {
     public user: User;
 
     constructor (private http: Http) {
-        /*this.user = new User ({
-            id: 1,
-            firstName: "Marin",
-            lastName: "Skorsur",
-            email: "m.skorsur@gmail.com",
-            address: "Rudera Boskovica 25, Split",
-            ratedProducts: [1, 3,5]
-        })*/
-
         this.http.get("http://localhost:63757/api/GetCurrentUser")
                  .subscribe( response => {
                      const serverUser = response.json();

@@ -8,7 +8,6 @@ export default class ProductService {
     public productList: Product[];
 
     constructor(private http: Http){
-        this.productList = [];   
         this.http.get("http://localhost:63757/api/Products")
                  .subscribe( response => {
                      const serverProducts: Array<any> = response.json();

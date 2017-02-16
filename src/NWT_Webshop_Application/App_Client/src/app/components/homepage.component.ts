@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import Product from './../models/Product';
 import ProductService from './../services/product.service';
 import ShoppingCartService from './../services/shopping-cart.service';
@@ -43,7 +43,7 @@ import ShoppingCartService from './../services/shopping-cart.service';
                 <div class="page-header">
                   <h1>Promotional items</h1>
                 </div>
-                    <div class="col-sm-4 col-lg-4 col-md-4" *ngFor="let product of productList">
+                    <div class="col-sm-4 col-lg-4 col-md-4" *ngFor="let product of this.productService.productList">
                         <div class="thumbnail">
                             <img src="{{product.imageURL}}" alt="">
                             <div class="caption">
@@ -72,17 +72,12 @@ import ShoppingCartService from './../services/shopping-cart.service';
 
     `
 })
-export default class HomepageComponent implements OnInit { 
-    private productList: Product[];
+export default class HomepageComponent { 
     private math: any;
 
     constructor(private productService: ProductService, 
                 private cartService: ShoppingCartService) {
         this.math = Math;
-    }
-
-    ngOnInit() {
-        this.productList = this.productService.getAllProducts();
     }
 
     private saveProductToCart(id:number) {

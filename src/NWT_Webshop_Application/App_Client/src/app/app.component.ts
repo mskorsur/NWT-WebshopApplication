@@ -59,13 +59,11 @@ import User from './models/User';
 `
 })
 export class AppComponent { 
-  //private currentUser: User;
 
   constructor(private productService: ProductService, 
               private userService: UserService,
               private router: Router) {
 
-        //this.currentUser = this.userService.getCurrentUser();
   }
 
 }
