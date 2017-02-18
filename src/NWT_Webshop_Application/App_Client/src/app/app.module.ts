@@ -1,8 +1,9 @@
 import { NgModule }  from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpModule }    from '@angular/http';
-
+import { HttpModule } from '@angular/http';
+import { FormsModule } from '@angular/forms';
+ 
 import { AppComponent }   from './app.component';
 import PageNotFoundRouteComponent  from './components/page-not-found.component';
 import ProductListComponent from './components/product-list.component';
@@ -22,7 +23,8 @@ import UserService from './services/user.service';
   [
     BrowserModule,
     AppRoutingModule,
-    HttpModule
+    HttpModule,
+    FormsModule
   ],
   declarations:
   [

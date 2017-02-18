@@ -90,6 +90,7 @@ namespace NWT_Webshop_Application.Controllers
 
         // POST: api/Products
         [ResponseType(typeof(Product))]
+        [HttpPost]
         public IHttpActionResult PostProduct(Product product)
         {
             if (!ModelState.IsValid)

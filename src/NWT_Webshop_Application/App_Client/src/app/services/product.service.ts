@@ -95,5 +95,22 @@ export default class ProductService {
             error => {console.log("Error", error)}
         );
     }
+
+    public addNewProduct(product: Product) {
+        this.http.post("http://localhost:63757/api/Products", {
+            Name: product.name,
+            Description: product.description,
+            ImageURL: product.imageURL,
+            Price: product.price,
+            AverageScore: product.averageScore,
+            NumberOfScores: product.numOfScores,
+            Tags: product.tags,
+            ShoppingCarts: []
+        })
+                 .subscribe(response => {console.log("Successfully added product.");
+                            product.id = response.json().id;
+                            this.productList.push(product); }, 
+                           error => {console.log("Error adding product.")})
+    }
   
 }
