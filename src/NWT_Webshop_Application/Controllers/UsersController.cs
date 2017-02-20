@@ -42,6 +42,7 @@ namespace NWT_Webshop_Application.Controllers
             currentUser.LastName = user.LastName;
             currentUser.Email = user.Email;
             currentUser.Address = user.Address;
+            currentUser.RatedProductsIDs = user.RatedProductsIDs;
 
             //if email is changed, we have to change username
             //accordingly since email is used as username

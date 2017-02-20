@@ -36,8 +36,8 @@ namespace NWT_Webshop_Application.Models
         [StringLength(100, MinimumLength = 5)]
         public string Address { get; set; }
 
-        [JsonIgnore]
-        public ICollection<Product> ListOfRatedProducts { get; set; }
+        [StringLength(500)]
+        public string RatedProductsIDs { get; set; }
 
         public virtual ShoppingCart ShoppingCart { get; set; }
     }

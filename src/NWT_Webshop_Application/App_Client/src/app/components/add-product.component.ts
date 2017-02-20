@@ -57,11 +57,12 @@ export default class AddProductComponent {
 			price: productForm.value.price,
 			imgURL: productForm.value.imageURL,
 			amount: 1,
-			numScores: 0,
-			avgScore: 0,
+			scores: [],
+			avgScore: 5,
 			tags: productForm.value.tags
 		});
 
+		console.log(inputProduct);
 		this.productService.addNewProduct(inputProduct);
 		productForm.reset();
 	}

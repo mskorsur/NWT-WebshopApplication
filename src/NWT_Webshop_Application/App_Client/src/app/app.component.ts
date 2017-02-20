@@ -25,7 +25,7 @@ import User from './models/User';
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a [routerLink]="['/products', 'men']" role="button" >MEN <span class="caret"></span></a>
+          <a [routerLink]="['/products', 'man']" role="button" >MEN <span class="caret"></span></a>
         </li>
         <li class="dropdown">
           <a [routerLink]="['/products', 'women']" role="button">WOMEN <span class="caret"></span></a>
@@ -38,7 +38,8 @@ import User from './models/User';
         <button type="submit" class="btn btn-default">Submit</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
-      <li role="presentation"><a routerLink="/cart">Shopping cart <span class="badge">{{numberOfShoppingCartItems}}</span></a></li>
+      <li role="presentation"><a routerLink="/cart">
+      <span class="glyphicon glyphicon-shopping-cart"></span>Shopping cart</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <span class="glyphicon glyphicon-user"></span> Hello, user!</a>

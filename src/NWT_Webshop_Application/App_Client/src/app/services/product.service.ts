@@ -18,7 +18,7 @@ export default class ProductService {
                        imgURL: p.imageURL,
                        price: p.price, 
                        avgScore: p.averageScore, 
-                       numScores: p.numberOfScores,
+                       scores: p.scores.split(","),
                        tags: p.tags.split(","), 
                        amount: 1 }));
                  }, error => {
@@ -46,7 +46,7 @@ export default class ProductService {
                             imgURL: p.imageURL,
                             price: p.price, 
                             avgScore: p.averageScore, 
-                            numScores: p.numberOfScores,
+                            scores: p.scores,
                             tags: p.tags.split(","), 
                             amount: 1 })); 
                      },
@@ -75,6 +75,16 @@ export default class ProductService {
         this.syncProduct(product);
     }
 
+    public updateProductAverageScore(product: Product, value: number) {
+        product.averageScore = value;
+        this.syncProduct(product);
+    }
+
+    public updateProductScores(product: Product, values: number[]) {
+        product.scores = values.map(s => s.toString());
+        this.syncProduct(product);
+    }
+
     public updateProductTags(product: Product, value: string[]) {
         product.tags = value;
         this.syncProduct(product);
@@ -88,7 +98,7 @@ export default class ProductService {
          ImageURL: product.imageURL,
          Price: product.price,
          AverageScore: product.averageScore,
-         NumberOfScores: product.numOfScores,
+         Scores: product.scores.join(","),
          Tags: product.tags.join(",") 
         }).subscribe(
             response => {console.log("Product update OK")},
@@ -103,7 +113,7 @@ export default class ProductService {
             ImageURL: product.imageURL,
             Price: product.price,
             AverageScore: product.averageScore,
-            NumberOfScores: product.numOfScores,
+            Scores: "5",
             Tags: product.tags,
             ShoppingCarts: []
         })

@@ -32,7 +32,8 @@ namespace NWT_Webshop_Application.Models
         [Display(Name = "Average Score")]
         public float AverageScore { get; set; }
 
-        public int NumberOfScores { get; set; }
+        [StringLength(500)]
+        public string Scores { get; set; }
 
         [Required]
         [StringLength(200)]

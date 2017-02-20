@@ -5,7 +5,7 @@ export default class Product {
     public imageURL: string;
     public price: number;
     public averageScore: number;
-    public numOfScores: number;
+    public scores: string[];
     public amount: number;
     public tags: string[];
 
@@ -16,7 +16,7 @@ export default class Product {
         this.imageURL = prodObj.imgURL;
         this.price = prodObj.price;
         this.averageScore = prodObj.avgScore;
-        this.numOfScores = prodObj.numScores;
+        this.scores = prodObj.scores;
         this.amount = prodObj.amount;
         this.tags = prodObj.tags;
     }
@@ -30,7 +30,7 @@ interface ProductConstrucorObject {
     imgURL: string;
     price: number;
     avgScore: number;
-    numScores: number
+    scores: string[]
     amount: number;
     tags: string[];
 }

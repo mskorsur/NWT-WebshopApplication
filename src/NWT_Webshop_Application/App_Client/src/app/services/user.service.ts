@@ -17,7 +17,7 @@ export default class UserService {
                          lastName: serverUser.lastName,
                          email: serverUser.email,
                          address: serverUser.address,
-                         ratedProducts: []
+                         ratedProducts: serverUser.ratedProductsIDs.split(",")
                      });
                  },
                   error => {console.log("Error getting current user's info.")});
@@ -34,6 +34,7 @@ export default class UserService {
          LastName: user.lastName,
          Email: user.email,
          Address: user.address,
+         RatedProductsIDs: user.ratedProducts.join(",")
         }).subscribe(
             response => {console.log("User update OK")},
             error => {console.log("Error", error)}
@@ -58,6 +59,18 @@ export default class UserService {
     public updateUserAddress(user: User, value: string) {
         user.address = value
         this.syncUser(user);
+    }
+
+    public updateUserRatedProducts(user: User, value: string) {
+        user.ratedProducts.push(value);
+        this.syncUser(user);
+    }
+
+    public checkIfUserRatedSelectedProduct(user:User, productID: string): boolean {
+        if (user.ratedProducts.find(p => p == productID))
+            return true;
+        else
+            return false;
     }
 
 }

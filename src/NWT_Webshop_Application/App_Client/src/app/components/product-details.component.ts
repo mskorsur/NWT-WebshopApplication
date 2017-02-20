@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import Product from './../models/Product';
+import User from './../models/User';
 import ProductService from './../services/product.service';
 import ShoppingCartService from './../services/shopping-cart.service';
+import UserService from './../services/user.service';
 
 
 @Component({
@@ -41,7 +43,7 @@ import ShoppingCartService from './../services/shopping-cart.service';
                                    <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 2"></span>
                                    <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 3"></span>
                                    <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 4"></span>
-								   ({{product.averageScore}})
+									({{product.averageScore | number : '1.2-2'}})
 							</div>
 						</div>
 
@@ -78,7 +80,9 @@ import ShoppingCartService from './../services/shopping-cart.service';
 							<option>5</option>
 						</select>
 						<span class="input-group-btn">
-						<button type="submit" class="btn btn-primary" type="button" (click)="rateProduct(ratingSelect.value)">Rate</button>
+						<button type="submit" class="btn btn-primary" type="button" 
+						(click)="rateProduct(ratingSelect.value, product.id.toString())"
+						[disabled]="this.userService.checkIfUserRatedSelectedProduct(user, product.id.toString())">Rate</button>
 						</span>
 				  </div>
 				</div>
@@ -97,6 +101,7 @@ import ShoppingCartService from './../services/shopping-cart.service';
 })
 export default class ProductDetailsComponent {
     private product: Product;
+	private user: User;
 	private addedToCart: boolean;
 	private alreadyInCart: boolean;
 	private nameEditMode: boolean;
@@ -108,10 +113,11 @@ export default class ProductDetailsComponent {
 
     constructor (private productService: ProductService, 
 	             private route: ActivatedRoute, 
-				 private cartService:ShoppingCartService) {
+				 private cartService: ShoppingCartService,
+				 private userService: UserService) {
         const id = +route.snapshot.params['id'];
         this.product = productService.getProductById(id);
-		
+		this.user = userService.getCurrentUser();
 		this.math = Math;
 
 		this.addedToCart = false;
@@ -171,7 +177,28 @@ export default class ProductDetailsComponent {
 	   this.tagsEditMode = false;
    }
 
-   private rateProduct(value: string) {
-	   this.product.averageScore = parseFloat(value);
+   private rateProduct(rating: string, productId: string) {
+	   var checkIfUserRatedProduct = this.userService.checkIfUserRatedSelectedProduct(this.user, productId);
+
+	   if (checkIfUserRatedProduct == false) {
+		   var productScores: number[] = this.product.scores.map(s => parseFloat(s));
+		   var scoreSum = productScores
+		   					.reduce((totalScore, currentScore) => { return totalScore + currentScore}, 0);
+
+		   var numOfScores = 0;
+		   productScores.forEach(p => numOfScores += 1);
+
+		   var newAverageScore = (scoreSum + parseFloat(rating)) / (numOfScores + 1);
+
+		   productScores.push(parseFloat(rating));
+
+		   this.productService.updateProductAverageScore(this.product, newAverageScore);
+		   this.productService.updateProductScores(this.product, productScores);
+		   this.userService.updateUserRatedProducts(this.user, productId);
+	   }
+
+	   else {
+		   console.log("User already rated that product");
+	   }
    }
 }
