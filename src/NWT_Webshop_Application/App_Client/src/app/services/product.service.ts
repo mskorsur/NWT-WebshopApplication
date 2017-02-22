@@ -6,6 +6,8 @@ import Product from './../models/Product';
 @Injectable()
 export default class ProductService {
     public productList: Product[];
+    public menProducts: Product[];
+    public womenProducts: Product[];
 
     constructor(private http: Http){
         this.http.get("http://localhost:63757/api/Products")
@@ -23,7 +25,7 @@ export default class ProductService {
                        amount: 1 }));
                  }, error => {
                      console.log("Error when retrieving products from server")
-                 });    
+                 }); 
     }
 
     public getAllProducts(): Product[] {
@@ -35,7 +37,7 @@ export default class ProductService {
     }
 
     public getProductsByCategory(category: string): Product[] {
-        this.http.get(`http://localhost:63757/api/Products/GetByCategory/${category}`)
+      /*  this.http.get(`http://localhost:63757/api/Products/GetByCategory/${category}`)
                  .subscribe(
                      response => {
                          const serverProducts: Array<any> = response.json();
@@ -51,8 +53,26 @@ export default class ProductService {
                             amount: 1 })); 
                      },
                      error => {console.log("Error getting products by category")}
-                 );
-        return this.productList;
+                 ); 
+        return this.productList; */
+        this.menProducts = this.productList.filter(p => p.tags.find(t => t == "man"));
+        this.womenProducts = this.productList.filter(p => p.tags.find(t => t == "women"));
+
+        if (category == "man") {
+            return this.menProducts;
+        }
+        else {
+            return this.womenProducts;
+        }
+    }
+
+    public searchForProducts(option: string, term: string): Product[] {
+        if (option == "name")
+            return this.productList.filter(p => p.name.toLowerCase().includes(term.toLowerCase()));
+        else if (option == "description")
+            return this.productList.filter(p => p.description.toLowerCase().includes(term.toLowerCase()));
+        else
+            return this.productList.filter(p => p.tags.find(t => t == term.toLowerCase()));
     }
 
     public updateProductName(product: Product, value: string) {

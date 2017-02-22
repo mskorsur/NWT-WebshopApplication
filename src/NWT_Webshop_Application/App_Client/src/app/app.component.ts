@@ -31,12 +31,7 @@ import User from './models/User';
           <a [routerLink]="['/products', 'women']" role="button">WOMEN <span class="caret"></span></a>
         </li>
       </ul>
-      <form class="navbar-form navbar-left">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search...">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form>
+      <search-bar></search-bar>
       <ul class="nav navbar-nav navbar-right">
       <li role="presentation"><a routerLink="/cart">
       <span class="glyphicon glyphicon-shopping-cart"></span>Shopping cart</a></li>

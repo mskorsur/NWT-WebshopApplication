@@ -192,9 +192,9 @@ export default class ProductDetailsComponent {
 
 		   productScores.push(parseFloat(rating));
 
-		   this.productService.updateProductAverageScore(this.product, newAverageScore);
 		   this.productService.updateProductScores(this.product, productScores);
 		   this.userService.updateUserRatedProducts(this.user, productId);
+		   this.productService.updateProductAverageScore(this.product, newAverageScore);
 	   }
 
 	   else {

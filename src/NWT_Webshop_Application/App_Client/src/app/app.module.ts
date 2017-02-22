@@ -12,6 +12,7 @@ import UserInfoComponent from './components/user-info.component';
 import ShoppingCartComponent from './components/shopping-cart.component';
 import ProductDetailsComponent from './components/product-details.component';
 import AddProductComponent from './components/add-product.component';
+import SearchBarComponent from './components/search-bar.component';
 
 
 import ProductService from './services/product.service';
@@ -30,7 +31,7 @@ import UserService from './services/user.service';
   [
      AppComponent, HomepageComponent, PageNotFoundRouteComponent, 
      ProductListComponent, ProductDetailsComponent, AddProductComponent,
-     UserInfoComponent,
+     UserInfoComponent, SearchBarComponent,
      ShoppingCartComponent 
   ],
   providers: [ ProductService, ShoppingCartService, UserService ],

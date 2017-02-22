@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import Product from './../models/Product';
@@ -36,7 +36,8 @@ import ShoppingCartService from './../services/shopping-cart.service';
                                    <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 1"></span>
                                    <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 2"></span>
                                    <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 3"></span>
-                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 4"></span>({{product.averageScore}})<span class="separator">|</span>
+                                   <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 4"></span>
+                                   ({{product.averageScore | number : '1.2-2'}})<span class="separator">|</span>
                                 <button class="btn btn-primary" (click)="saveProductToCart(product.id)">Add to cart</button>
                             </div>
                         </div>
@@ -53,13 +54,23 @@ import ShoppingCartService from './../services/shopping-cart.service';
 export default class ProductListComponent {
    private productList: Product[];
    private math: any;
-
    constructor(private productService: ProductService, 
                private cartService: ShoppingCartService,
                private route: ActivatedRoute) {
-        const category = route.snapshot.params['category'];
-        this.productList = this.productService.getProductsByCategory(category);
         this.math = Math;
+
+        const category = route.snapshot.params['category'];
+
+        const searchTerm = route.snapshot.queryParams['term'];
+        const searchOption = route.snapshot.queryParams['option'];
+
+        if (category != undefined) {
+            this.productList = this.productService.getProductsByCategory(category);
+        }
+        else {
+            this.productList = this.productService.searchForProducts(searchOption, searchTerm);
+        }
+        
    }
 
    private saveProductToCart(id:number) {
