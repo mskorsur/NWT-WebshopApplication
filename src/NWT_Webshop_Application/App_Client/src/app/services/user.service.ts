@@ -8,7 +8,7 @@ export default class UserService {
     public user: User;
 
     constructor (private http: Http) {
-        this.http.get("http://localhost:63757/api/GetCurrentUser")
+       this.http.get("http://localhost:63757/api/GetCurrentUser")
                  .subscribe( response => {
                      const serverUser = response.json();
                      this.user = new User({
@@ -20,7 +20,7 @@ export default class UserService {
                          ratedProducts: serverUser.ratedProductsIDs.split(",")
                      });
                  },
-                  error => {console.log("Error getting current user's info.")});
+                  error => {console.log("Error getting current user's info.")}); 
     }
 
     public getCurrentUser(): User {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import Product from './../models/Product';
@@ -59,18 +59,24 @@ export default class ProductListComponent {
                private route: ActivatedRoute) {
         this.math = Math;
 
-        const category = route.snapshot.params['category'];
-
-        const searchTerm = route.snapshot.queryParams['term'];
-        const searchOption = route.snapshot.queryParams['option'];
-
-        if (category != undefined) {
-            this.productList = this.productService.getProductsByCategory(category);
+        //check if the component is going to be used for 
+        //listing products or for displaying search results
+        let category = route.snapshot.params['category'];
+        if (category != null) {
+            //if the component is used for listing category products
+            route.params.subscribe(params => {
+                let category = params['category'];
+                this.productList = this.productService.getProductsByCategory(category);
+            });
         }
         else {
-            this.productList = this.productService.searchForProducts(searchOption, searchTerm);
+            //if the component is used for displaying search results
+            route.queryParams.subscribe(params => {
+                let searchOption = params['option'];
+                let searchTerm = params['term'];
+                this.productList = this.productService.searchForProducts(searchOption, searchTerm);
+            });
         }
-        
    }
 
    private saveProductToCart(id:number) {

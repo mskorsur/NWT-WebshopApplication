@@ -37,24 +37,6 @@ export default class ProductService {
     }
 
     public getProductsByCategory(category: string): Product[] {
-      /*  this.http.get(`http://localhost:63757/api/Products/GetByCategory/${category}`)
-                 .subscribe(
-                     response => {
-                         const serverProducts: Array<any> = response.json();
-                         this.productList = serverProducts.map(p => new Product
-                           ({id: p.productID, 
-                            name: p.name, 
-                            description: p.description, 
-                            imgURL: p.imageURL,
-                            price: p.price, 
-                            avgScore: p.averageScore, 
-                            scores: p.scores,
-                            tags: p.tags.split(","), 
-                            amount: 1 })); 
-                     },
-                     error => {console.log("Error getting products by category")}
-                 ); 
-        return this.productList; */
         this.menProducts = this.productList.filter(p => p.tags.find(t => t == "man"));
         this.womenProducts = this.productList.filter(p => p.tags.find(t => t == "women"));
 
