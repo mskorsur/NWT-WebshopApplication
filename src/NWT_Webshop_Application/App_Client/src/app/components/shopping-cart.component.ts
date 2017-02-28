@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import Product from './../models/Product';
 import ShoppingCartService from './../services/shopping-cart.service';
 
@@ -57,30 +57,47 @@ import ShoppingCartService from './../services/shopping-cart.service';
 </div>
     `
 })
-export default class ShoppingCartComponent {
+export default class ShoppingCartComponent implements OnInit {
 	private productList: Product[];
 	private totalCost: number;
 
-	constructor(private cartService: ShoppingCartService) {
-		this.productList = cartService.returnAllProducts();
-		this.totalCost = cartService.calculateTotalCost();
-	 }
+	constructor(private cartService: ShoppingCartService) {	}
 
-	 
+	 ngOnInit() {
+		this.cartService.getCurrentUserShoppingCart()
+			.subscribe(data => { this.productList = data;
+						this.totalCost = this.cartService.calculateTotalCost(this.productList); },
+					    error => { console.log("Error getting cart items") }); 
+	 }
 
 	 /*remove product from the cart, then update product list, mappedProducts and total price */
 	 private removeProductButtonClicked(id: number) {
-		this.cartService.removeProductFromCartById(id);
-		this.productList = this.cartService.returnAllProducts();
-		this.totalCost = this.cartService.calculateTotalCost();
+		var currentProductIndex = this.productList.findIndex(prod => prod.id == id);
+
+		this.cartService.removeProductFromCartById(id)
+		    .subscribe(response => {
+					    /*reset the amount of the product being removed back to 1 */
+						this.productList[currentProductIndex].amount = 1;
+						/*remove the product from the list */
+						this.productList = this.productList.filter(prod => prod.id != id);
+						this.totalCost = this.cartService.calculateTotalCost(this.productList);
+						console.log("Removed product from the cart");
+			 		}, error => { console.log("Error removing product from cart") });
 	 }
 
 	 /*send id of the product to the cartService so that the amount of 
 	 that product can be updated by the cartService, afterwards call service's 
 	 total cost method to get a new total cost */
-	 private updateProductAmountAndCost(amount: number, id: number) {
-		this.cartService.updateProductAmount(amount, id);
-		this.totalCost = this.cartService.calculateTotalCost();
+	 private updateProductAmountAndCost(amount: string, id: number) {
+		var currentProductIndex = this.productList.findIndex(prod => prod.id == id);
+
+		this.cartService.updateProductAmount(parseInt(amount), id)
+		                .subscribe(response => {
+             this.productList[currentProductIndex].amount = parseInt(amount);
+			 this.totalCost = this.cartService.calculateTotalCost(this.productList);
+             console.log("Updated product amount");
+         }, error => { console.log("Error updating product amount") });
+
 	 }
 
 

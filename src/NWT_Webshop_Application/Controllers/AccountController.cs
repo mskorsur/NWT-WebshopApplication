@@ -157,6 +157,7 @@ namespace NWT_Webshop_Application.Controllers
                     FirstName = model.FirstName,
                     LastName = model. LastName,
                     Address = model.Address,
+                    RatedProductsIDs = "0"
                     };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

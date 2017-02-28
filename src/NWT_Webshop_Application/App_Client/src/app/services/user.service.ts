@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
 import User from './../models/User';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export default class UserService {
     public user: User;
 
     constructor (private http: Http) {
+        
        this.http.get("http://localhost:63757/api/GetCurrentUser")
                  .subscribe( response => {
                      const serverUser = response.json();
@@ -26,7 +30,25 @@ export default class UserService {
     public getCurrentUser(): User {
         return this.user;
     }
+    /*
+    public getCurrentUser(): Observable<User> {
+        return this.http.get("http://localhost:63757/api/GetCurrentUser")
+                        .map(this.extractUserData);
+    }
 
+    private extractUserData(response: Response) {
+        let serverUser = response.json();
+        let user = new User({
+                         id: serverUser.id,
+                         firstName: serverUser.firstName,
+                         lastName: serverUser.lastName,
+                         email: serverUser.email,
+                         address: serverUser.address,
+                         ratedProducts: serverUser.ratedProductsIDs.split(",")
+                     });
+        return user;
+    }
+    */
     public syncUser(user: User) {
         this.http.put("http://localhost:63757/api/UpdateCurrentUser",
         {Id: user.id,

@@ -18,6 +18,8 @@ namespace NWT_Webshop_Application.Models
 
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
 
+        public DbSet<ShoppingCartProduct> CartsProducts { get; set; }
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();

@@ -20,14 +20,14 @@ namespace NWT_Webshop_Application.Controllers
         // GET: api/Products
         public IQueryable<Product> GetProducts()
         {
-            return db.Products.Include(p => p.ShoppingCarts);
+            return db.Products;
         }
 
         // GET: api/Products/GetByCategory/men
         [Route("api/Products/GetByCategory/{category}")]
         public ICollection<Product> GetProductsByCategory(string category)
         {
-            var products =  db.Products.Include(p => p.ShoppingCarts);
+            var products =  db.Products;
             List<Product> specifiedProducts = new List<Product>();
 
             foreach (var product in products)

@@ -16,57 +16,66 @@ namespace NWT_Webshop_Application.Controllers
     public class ShoppingCartsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
-        // GET: api/ShoppingCarts
-        public IQueryable<ShoppingCart> GetShoppingCarts()
+        
+        [Route("api/GetAllCartProducts")]
+        [ResponseType(typeof(ShoppingCartProduct))]
+        [HttpGet]
+        public ICollection<ShoppingCartProduct> GetProductsAndAmounts(string id)
         {
-            return db.ShoppingCarts;
+            var currentUserProducts = db.CartsProducts
+                                        .Where(cp => cp.ShoppingCartID == id)
+                                        .ToList();
+
+            return currentUserProducts;
         }
 
-        // GET: api/ShoppingCarts/5
-        [ResponseType(typeof(ShoppingCart))]
-        public IHttpActionResult GetShoppingCart(string id)
+        [Route("api/SaveProductInCart")]
+        [HttpGet]
+        public IHttpActionResult SaveProduct(string userId, int productId)
         {
-            ShoppingCart shoppingCart = db.ShoppingCarts.Find(id);
-            if (shoppingCart == null)
+            var currentUserCart = db.ShoppingCarts.FirstOrDefault(c => c.User.Id == userId);
+            var newCartItem = new ShoppingCartProduct()
             {
-                return NotFound();
-            }
+                ShoppingCartID = currentUserCart.ShoppingCartID,
+                ProductID = productId,
+                Product = db.Products.FirstOrDefault(p => p.ProductID == productId),
+                Amount = 1
+            };
 
-            return Ok(shoppingCart);
+            currentUserCart.ShoppingCartProducts.Add(newCartItem);
+
+            db.Entry(currentUserCart).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // PUT: api/ShoppingCarts/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutShoppingCart(string id, ShoppingCart shoppingCart)
+        [Route("api/UpdateCartProduct")]
+        [HttpPut]
+        public IHttpActionResult UpdateProductAmount(ShoppingCartViewModel update)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var userProducts = GetProductsAndAmounts(update.UserID);
+            var currentProduct = userProducts.FirstOrDefault(p => p.ProductID == update.ProductID);
+            currentProduct.Amount = update.Amount;
 
-            if (id != shoppingCart.ShoppingCartID)
-            {
-                return BadRequest();
-            }
+            db.Entry(currentProduct).State = EntityState.Modified;
+            db.SaveChanges();
 
-            db.Entry(shoppingCart).State = EntityState.Modified;
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ShoppingCartExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        [Route("api/DeleteCartProduct")]
+        [HttpGet]
+        public IHttpActionResult DeleteProduct(string userId, int productId)
+        {
+            var currentUserCart = db.ShoppingCarts.FirstOrDefault(c => c.User.Id == userId);
+            var userProducts = GetProductsAndAmounts(userId);
+            var currentProduct = userProducts.FirstOrDefault(p => p.ProductID == productId);
+
+            currentUserCart.ShoppingCartProducts.Remove(currentProduct);
+
+            db.Entry(currentProduct).State = EntityState.Deleted;
+            db.SaveChanges();
 
             return StatusCode(HttpStatusCode.NoContent);
         }

@@ -40,7 +40,7 @@ namespace NWT_Webshop_Application.Models
         public string Tags { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<ShoppingCart> ShoppingCarts { get; set; }
+        public virtual ICollection<ShoppingCartProduct> ShoppingCartProducts { get; set; }
 
     }
 }

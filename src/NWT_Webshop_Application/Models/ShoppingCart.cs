@@ -15,7 +15,7 @@ namespace NWT_Webshop_Application.Models
 
         public virtual ApplicationUser User { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<ShoppingCartProduct> ShoppingCartProducts { get; set; }
 
     }
 }
