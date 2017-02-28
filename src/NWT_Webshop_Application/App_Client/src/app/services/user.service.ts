@@ -11,7 +11,6 @@ export default class UserService {
     public user: User;
 
     constructor (private http: Http) {
-        
        this.http.get("http://localhost:63757/api/GetCurrentUser")
                  .subscribe( response => {
                      const serverUser = response.json();
@@ -25,11 +24,12 @@ export default class UserService {
                      });
                  },
                   error => {console.log("Error getting current user's info.")}); 
-    }
+    } 
 
     public getCurrentUser(): User {
-        return this.user;
-    }
+        return this.user; 
+    } 
+    
     /*
     public getCurrentUser(): Observable<User> {
         return this.http.get("http://localhost:63757/api/GetCurrentUser")
@@ -49,6 +49,7 @@ export default class UserService {
         return user;
     }
     */
+    
     public syncUser(user: User) {
         this.http.put("http://localhost:63757/api/UpdateCurrentUser",
         {Id: user.id,

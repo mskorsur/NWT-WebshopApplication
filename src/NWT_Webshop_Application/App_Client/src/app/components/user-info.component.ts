@@ -67,7 +67,7 @@ export default class UserInfoComponent {
     private addressEditMode: boolean;
 
     constructor(private userService: UserService) {
-        this.currentUser = this.userService.getCurrentUser();
+        this.currentUser = this.userService.getCurrentUser()
         this.firstNameEditMode = false;
         this.lastNameEditMode = false;
         this.emailEditMode = false;

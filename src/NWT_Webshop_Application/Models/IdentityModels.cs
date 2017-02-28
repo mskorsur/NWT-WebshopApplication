@@ -29,7 +29,7 @@ namespace NWT_Webshop_Application.Models
 
         [Required]
         [StringLength(50, MinimumLength = 3)]
-        [Display(Name = "Last name")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
         [Required]

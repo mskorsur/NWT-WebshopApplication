@@ -33,8 +33,8 @@ import User from './models/User';
       </ul>
       <search-bar></search-bar>
       <ul class="nav navbar-nav navbar-right">
-      <li role="presentation"><a routerLink="/cart">
-      <span class="glyphicon glyphicon-shopping-cart"></span>Shopping cart</a></li>
+        <li role="presentation"><a routerLink="/cart">
+        <span class="glyphicon glyphicon-shopping-cart"></span>Shopping cart</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <span class="glyphicon glyphicon-user"></span> Hello, user!</a>
@@ -45,7 +45,6 @@ import User from './models/User';
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
           </ul>
         </li>
-
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

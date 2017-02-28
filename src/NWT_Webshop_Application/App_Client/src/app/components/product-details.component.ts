@@ -117,7 +117,7 @@ export default class ProductDetailsComponent {
 				 private userService: UserService) {
         const id = +route.snapshot.params['id'];
         this.product = productService.getProductById(id);
-		this.user = userService.getCurrentUser();
+		this.user = this.userService.getCurrentUser();
 		this.math = Math;
 
 		this.addedToCart = false;

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using NWT_Webshop_Application.Models;
+using System.Collections.Generic;
 
 namespace NWT_Webshop_Application.Controllers
 {
@@ -17,6 +18,7 @@ namespace NWT_Webshop_Application.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -162,6 +164,21 @@ namespace NWT_Webshop_Application.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    //create an empty car for a new user with matching ID
+                    ShoppingCart newCartItem = new ShoppingCart()
+                    {
+                        ShoppingCartID = user.Id,
+                        User = user,
+                        ShoppingCartProducts = new List<ShoppingCartProduct>()
+                    };
+
+                    //set the user's cart to the newly created one and
+                    //add that object to the database
+                    user.ShoppingCart = newCartItem;
+                    db.ShoppingCarts.Add(newCartItem);
+                    db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
+
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
