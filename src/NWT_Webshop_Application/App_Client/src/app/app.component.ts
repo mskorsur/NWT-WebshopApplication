@@ -36,8 +36,10 @@ import User from './models/User';
         <li role="presentation"><a routerLink="/cart">
         <span class="glyphicon glyphicon-shopping-cart"></span>Shopping cart</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <a href="#" *ngIf="!checkCurrentUser()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <span class="glyphicon glyphicon-user"></span> Hello, user!</a>
+          <a href="#" *ngIf="checkCurrentUser()" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-user"></span> Hello, {{currentUser.firstName}}!</a>
           <ul class="dropdown-menu">
             <li><a routerLink="/add-product" routerLinkActive="active">Add new item</a></li>
             <li><a routerLink="/profile" routerLinkActive="active" >My profile</a></li>
@@ -57,9 +59,15 @@ export class AppComponent {
   private currentUser: User;
   
   constructor(private productService: ProductService, 
-              private userService: UserService,
-              private router: Router) {
+              private userService: UserService) {
+  }
 
+  private checkCurrentUser(): boolean {
+     this.currentUser = this.userService.getCurrentUser();
+     if (this.currentUser != undefined)
+      return true;
+     else
+      return false;
   }
 
   }

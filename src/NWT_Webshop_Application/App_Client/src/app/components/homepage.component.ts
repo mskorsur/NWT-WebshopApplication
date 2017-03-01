@@ -83,4 +83,8 @@ export default class HomepageComponent {
     private saveProductToCart(id:number) {
 		 this.cartService.saveProductInCartById(id);
 	}
+
+    private filterPromoProducts(products: Product[]): Product[] {
+        return products.filter(p => p.tags.find(t => t == "promo"));
+    }
 }
