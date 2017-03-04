@@ -66,7 +66,11 @@ export default class ProductListComponent {
             //if the component is used for listing category products
             route.params.subscribe(params => {
                 let category = params['category'];
-                this.productList = this.productService.getProductsByCategory(category);
+                //this.productList = this.productService.getProductsByCategory(category);
+                this.productService.getAllProducts()
+                    .subscribe(data => {
+                       this.productList = this.productService.filterProductsByCategory(category, data);
+                    }, error => { console.log("Error getting category products") });
             });
         }
         else {
@@ -74,13 +78,16 @@ export default class ProductListComponent {
             route.queryParams.subscribe(params => {
                 let searchOption = params['option'];
                 let searchTerm = params['term'];
-                this.productList = this.productService.searchForProducts(searchOption, searchTerm);
+                
+                this.productService.getAllProducts()
+                    .subscribe(data => {
+                       this.productList = this.productService.searchForProducts(searchOption, searchTerm, data);
+                    }, error => { console.log("Error getting search results") });
             });
         }
    }
 
    private saveProductToCart(id:number) {
-         this.math = Math;
 		 this.cartService.saveProductInCartById(id);
    }
 }

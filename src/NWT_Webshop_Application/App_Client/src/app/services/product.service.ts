@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
 import Product from './../models/Product';
+
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export default class ProductService {
@@ -10,6 +13,7 @@ export default class ProductService {
     public womenProducts: Product[];
 
     constructor(private http: Http){
+        /*
         this.http.get("http://localhost:63757/api/Products")
                  .subscribe( response => {
                      const serverProducts: Array<any> = response.json();
@@ -26,35 +30,54 @@ export default class ProductService {
                  }, error => {
                      console.log("Error when retrieving products from server")
                  }); 
+        */
     }
-
+    
+    /*
     public getAllProducts(): Product[] {
          return this.productList;
+    } */
+
+    public getAllProducts(): Observable<Product[]> {
+        return  this.http.get("http://localhost:63757/api/Products")
+                         .map(this.extractProductsData);
     }
 
-    public getProductById(id:number): Product {
-         return this.productList.find(prod => prod.id == id);
+    private extractProductsData(response: Response) {
+        let serverProducts: Array<any> = response.json();
+        let products: Product[] = serverProducts.map(p => new Product
+                     ({id: p.productID, 
+                       name: p.name, 
+                       description: p.description, 
+                       imgURL: p.imageURL,
+                       price: p.price, 
+                       avgScore: p.averageScore, 
+                       scores: p.scores.split(","),
+                       tags: p.tags.split(","), 
+                       amount: 1 }));
+        return products;
     }
 
-    public getProductsByCategory(category: string): Product[] {
-        this.menProducts = this.productList.filter(p => p.tags.find(t => t == "man"));
-        this.womenProducts = this.productList.filter(p => p.tags.find(t => t == "women"));
+    public getProductById(id: number, products: Product[]): Product {
+         return products.find(prod => prod.id == id);
+    }
 
+    public filterProductsByCategory(category: string, products: Product[]): Product[] {
         if (category == "man") {
-            return this.menProducts;
+            return products.filter(p => p.tags.find(t => t == "man"));
         }
         else {
-            return this.womenProducts;
+            return products.filter(p => p.tags.find(t => t == "women"));
         }
     }
 
-    public searchForProducts(option: string, term: string): Product[] {
+    public searchForProducts(option: string, term: string, products: Product[]): Product[] {
         if (option == "name")
-            return this.productList.filter(p => p.name.toLowerCase().includes(term.toLowerCase()));
+            return products.filter(p => p.name.toLowerCase().includes(term.toLowerCase()));
         else if (option == "description")
-            return this.productList.filter(p => p.description.toLowerCase().includes(term.toLowerCase()));
+            return products.filter(p => p.description.toLowerCase().includes(term.toLowerCase()));
         else
-            return this.productList.filter(p => p.tags.find(t => t == term.toLowerCase()));
+            return products.filter(p => p.tags.find(t => t == term.toLowerCase()));
     }
 
     public updateProductName(product: Product, value: string) {
@@ -118,11 +141,8 @@ export default class ProductService {
             Scores: "5",
             Tags: product.tags,
             ShoppingCarts: []
-        })
-                 .subscribe(response => {console.log("Successfully added product.");
-                            product.id = response.json().id;
-                            this.productList.push(product); }, 
-                           error => {console.log("Error adding product.")})
+        }).subscribe(response => {console.log("Successfully added product."); }, 
+                     error => {console.log("Error adding product.")})
     }
   
 }

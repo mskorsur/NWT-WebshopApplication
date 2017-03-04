@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import Product from './../models/Product';
@@ -11,9 +11,9 @@ import UserService from './../services/user.service';
 @Component({
     selector: 'product-details',
     template: `
-        <div class="container">
+        <div class="container" *ngIf="checkCurrentProduct()">
 		<div class="card">
-			<div class="container-fliud">
+			<div class="container-fluid">
 				<div class="wrapper row">
 					<div class="preview col-md-6">
 						
@@ -99,7 +99,7 @@ import UserService from './../services/user.service';
 
     `
 })
-export default class ProductDetailsComponent {
+export default class ProductDetailsComponent implements OnInit {
     private product: Product;
 	private user: User;
 	private addedToCart: boolean;
@@ -115,11 +115,9 @@ export default class ProductDetailsComponent {
 	             private route: ActivatedRoute, 
 				 private cartService: ShoppingCartService,
 				 private userService: UserService) {
-        const id = +route.snapshot.params['id'];
-        this.product = productService.getProductById(id);
+        
 		this.user = this.userService.getCurrentUser();
 		this.math = Math;
-
 		this.addedToCart = false;
 		this.nameEditMode = false;
 		this.descriptionEditMode = false;
@@ -127,6 +125,22 @@ export default class ProductDetailsComponent {
 		this.imgURLEditMode = false;
 		this.tagsEditMode = false;
     }
+
+	ngOnInit() {
+		const id = +this.route.snapshot.params['id'];
+        this.productService.getAllProducts()
+			.subscribe(data => { this.product = this.productService.getProductById(id, data); },
+					   error => { console.log("Error getting single product") });
+	}
+
+	private checkCurrentProduct(): boolean {
+		if (this.product != undefined) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 	private saveProductToCart (id:number) {
 		 if (this.cartService.saveProductInCartById(id) == false)

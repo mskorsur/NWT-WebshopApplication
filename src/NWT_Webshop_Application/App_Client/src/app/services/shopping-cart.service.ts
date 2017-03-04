@@ -45,10 +45,13 @@ export default class ShoppingCartService {
         if (this.productList.find(prod => prod.id == id) != null)
             return false;
         else {
-            let product: Product = this.productService.getProductById(id);
+            let product: Product;
+            this.productService.getAllProducts()
+                .subscribe(data => { product = this.productService.getProductById(id, data) },
+					   error => { console.log("Error getting single product") });
             this.http.get(`http://localhost:63757/api/SaveProductInCart?userId=${this.userService.user.id}&productId=${id}`)
                      .subscribe(response => {
-                        this.productList.push(this.productService.getProductById(id));
+                        this.productList.push(product);
                         console.log("Saved product to the cart");
                     }, error => { console.log("Error saving product to cart") });
 
