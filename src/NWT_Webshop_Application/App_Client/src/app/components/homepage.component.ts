@@ -53,7 +53,8 @@ import ShoppingCartService from './../services/shopping-cart.service';
                                 <p>{{product.description}}</p>
                             </div>
                             <div class="ratings">
-                            <p class="pull-right"><a class="btn btn-primary thumb-button" role="button" (click)="saveProductToCart(product.id)">Add to cart</a></p>
+                            <p class="pull-right">
+                            <a class="btn btn-primary thumb-button" role="button" #cartButton (click)="saveProductToCart(product.id, cartButton)">Add to cart</a></p>
                                 <p>
                                    <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 1"></span>
                                    <span class="glyphicon glyphicon-star" *ngIf="product.averageScore >= 2"></span>
@@ -87,8 +88,19 @@ export default class HomepageComponent implements OnInit {
                        error => { console.log("Error getting promo products") });
     }
 
-    private saveProductToCart(id:number) {
-		 this.cartService.saveProductInCartById(id);
+    private saveProductToCart(id:number, cartButton: HTMLButtonElement) {
+         this.cartService.getCurrentUserShoppingCart()
+             .subscribe(data => {
+                 if (this.cartService.isProductInCart(id, data)) {
+                    console.log("The product is already in the cart");
+                    cartButton.innerText = "Already in cart!";
+
+                 }
+                 else {
+                     this.cartService.saveProductInCartById(id);
+                     cartButton.innerText = "Added!";
+                 }
+             }, error => { console.log("Error sending to cart") });	 
 	}
 
     private filterPromoProducts(products: Product[]): Product[] {

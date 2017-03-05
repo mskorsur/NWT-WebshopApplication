@@ -38,7 +38,7 @@ import ShoppingCartService from './../services/shopping-cart.service';
                                    <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 3"></span>
                                    <span class="glyphicon glyphicon-star-empty" *ngIf="(5 - math.floor(product.averageScore)) >= 4"></span>
                                    ({{product.averageScore | number : '1.2-2'}})<span class="separator">|</span>
-                                <button class="btn btn-primary" (click)="saveProductToCart(product.id)">Add to cart</button>
+                                <button class="btn btn-primary" #cartButton (click)="saveProductToCart(product.id, cartButton)">Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -87,7 +87,18 @@ export default class ProductListComponent {
         }
    }
 
-   private saveProductToCart(id:number) {
-		 this.cartService.saveProductInCartById(id);
+   private saveProductToCart(id:number, cartButton: HTMLButtonElement) {
+	 this.cartService.getCurrentUserShoppingCart()
+         .subscribe(data => {
+             if (this.cartService.isProductInCart(id, data)) {
+                    console.log("The product is already in the cart");
+                    cartButton.innerText = "Already in cart!";
+
+             }
+             else {
+                this.cartService.saveProductInCartById(id);
+                cartButton.innerText = "Added!";
+                 }
+         }, error => { console.log("Error sending to cart") });
    }
 }

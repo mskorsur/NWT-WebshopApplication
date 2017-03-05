@@ -143,11 +143,17 @@ export default class ProductDetailsComponent implements OnInit {
 	}
 
 	private saveProductToCart (id:number) {
-		 if (this.cartService.saveProductInCartById(id) == false)
-		 	this.alreadyInCart = true;
-		 else
-		 	this.addedToCart = true;
-	}
+		 this.cartService.getCurrentUserShoppingCart()
+		     .subscribe(data => {
+				 if (this.cartService.isProductInCart(id, data)) {
+					 this.alreadyInCart = true;
+				 }
+				 else {
+					 this.cartService.saveProductInCartById(id);
+					 this.addedToCart = true;
+				 }
+			 });
+	} 
 	
    private finishProductNameEditing (value: string, save: boolean) {
 	   if (save) {

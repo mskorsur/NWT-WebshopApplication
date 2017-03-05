@@ -41,22 +41,18 @@ export default class ShoppingCartService {
         return products;
     }
 
-    public saveProductInCartById(id:number): boolean {
-        if (this.productList.find(prod => prod.id == id) != null)
-            return false;
-        else {
-            let product: Product;
-            this.productService.getAllProducts()
-                .subscribe(data => { product = this.productService.getProductById(id, data) },
+    public saveProductInCartById(id:number) {
+        let newProduct: Product;
+
+        //product is not in the cart
+        //get product form a service and push it to the server
+        this.productService.getAllProducts()
+            .subscribe(data => { newProduct = this.productService.getProductById(id, data) },
 					   error => { console.log("Error getting single product") });
-            this.http.get(`http://localhost:63757/api/SaveProductInCart?userId=${this.userService.user.id}&productId=${id}`)
-                     .subscribe(response => {
-                        this.productList.push(product);
+        this.http.get(`http://localhost:63757/api/SaveProductInCart?userId=${this.userService.user.id}&productId=${id}`)
+            .subscribe(response => {
                         console.log("Saved product to the cart");
                     }, error => { console.log("Error saving product to cart") });
-
-            return true;
-        }
     }
 
     public removeProductFromCartById(id:number): Observable<Response> {
@@ -71,6 +67,15 @@ export default class ShoppingCartService {
              ProductID: id,
              Amount: amount
          }); 
+    }
+
+    public isProductInCart(productId: number, cart: Product[]): boolean {
+       if (cart.find(p => p.id == productId) != undefined) {
+           return true;
+       }
+       else {
+           return false;
+       }
     }
 
     public returnAllProducts(): Product[] {
